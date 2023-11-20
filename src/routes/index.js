@@ -1,26 +1,30 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../pages/Home";
-import Update from "../pages/Update";
+import React, { useContext } from "react";
+import { View, ActivityIndicator } from "react-native";
 
-const AppStack = createNativeStackNavigator();
-export default function Routes() {
-  return (
-    <AppStack.Navigator>
-      <AppStack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false,
+import { AuthContext } from "../contexts/auth";
+
+import AuthRoutes from "./auth.routes";
+import AppRoutes from "./app.routes";
+
+function Routes() {
+  const { signed, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#F0F4FF",
         }}
-      />
-      <AppStack.Screen
-        name="Update"
-        component={Update}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </AppStack.Navigator>
-  );
+      >
+        <ActivityIndicator size="large" color="#131313" />
+      </View>
+    );
+  }
+
+  return signed ? <AppRoutes /> : <AuthRoutes />;
 }
+
+export default Routes;
