@@ -1,7 +1,8 @@
-import React, { useState, useNavigation, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Button, TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { ref, update } from "firebase/database";
-import db from "../../firebaseConnection";
+import db from "../../services/firebaseConnection";
 
 export default function Update() {
   const navigation = useNavigation();
