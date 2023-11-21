@@ -1,25 +1,36 @@
 import styled from "styled-components/native";
-import { Text, View, SafeAreaView } from "react-native";
+import { Text } from "react-native";
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   align-items: center;
   justify-content: center;
 `;
-
-export const Header = styled.View`
+export const HeaderArea = styled.View`
+  height: 20%;
+  width: 110%;
+  bottom: 15%;
+  background-color: #68b2f8;
   align-items: center;
-  bottom: 120px;
+`;
+
+export const HeaderText = styled(Text)`
+  vertical-align: top;
+  top: 50%;
+  font-size: 35px;
+  color: #000;
+`;
+
+export const ContentArea = styled.View`
+  flex-direction: column;
+  height: 50%;
+  bottom: 20%;
+  align-items: center;
   justify-content: center;
 `;
 
 export const AreaInput = styled.View`
   flex-direction: row;
-`;
-
-export const HeadText = styled.Text`
-  font-size: 30px;
-  color: #000;
 `;
 
 export const Input = styled.TextInput`
@@ -35,6 +46,7 @@ export const Input = styled.TextInput`
 export const SubmitButton = styled.TouchableOpacity`
   width: 70%;
   height: 45px;
+  bottom: 20%;
   border-radius: 8px;
   background-color: #ffff;
   border: 1px solid #000;

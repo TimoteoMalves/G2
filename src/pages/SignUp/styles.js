@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Text, View, SafeAreaView } from "react-native";
+import { Text } from "react-native";
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -53,4 +53,19 @@ export const ButtonText = styled.Text`
   font-size: 18px;
   font-weight: bold;
   color: #0000ff;
+`;
+
+export const GoBackButton = styled.TouchableOpacity`
+  width: 60px;
+  height: 15px;
+  display: flex;
+  margin: 10px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  align-items: center;
+`;
+
+export const GoBackText = styled.Text`
+  font-size: 10px;
+  color: #000;
 `;

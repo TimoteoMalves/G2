@@ -8,6 +8,8 @@ import {
   ButtonText,
   Title,
   SubmitButton,
+  Header,
+  HeadText,
 } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
@@ -15,7 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../contexts/auth";
 
 export default function SignIn() {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
   const { signIn } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
@@ -23,10 +25,14 @@ export default function SignIn() {
 
   function handleLogin() {
     signIn(email, password);
+    navigation.navigate("ListTasks");
   }
 
   return (
     <Container behavior={Platform.OS === "ios" ? "padding" : ""} enabled>
+      <Header>
+        <HeadText>Welcome!</HeadText>
+      </Header>
       <AreaInput>
         <Title>E-mail</Title>
         <Input
@@ -50,12 +56,10 @@ export default function SignIn() {
         <SubmitButton onPress={handleLogin}>
           <ButtonText>Login</ButtonText>
         </SubmitButton>
-
-        {/* 
-            <Link onPress={() => navigation.navigate("SignUp")}>
-              <LinkText>Criar nova conta</LinkText>
-            </Link> */}
       </AreaInput>
+      <SubmitButton onPress={() => navigation.navigate("SignUp")}>
+        <ButtonText>Create account</ButtonText>
+      </SubmitButton>
     </Container>
   );
 }

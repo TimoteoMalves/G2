@@ -2,54 +2,55 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ref, update } from "firebase/database";
-import db from "../../services/firebaseConnection";
+import { db } from "../../services/firebaseConnection";
+
+import {
+  Container,
+  AreaInput,
+  Input,
+  ButtonText,
+  Title,
+  SubmitButton,
+  ContentArea,
+  HeaderArea,
+  HeaderText,
+} from "./styles";
 
 export default function Update() {
   const navigation = useNavigation();
   const [taskName, setTaskName] = useState("");
   const [deadline, setDeadline] = useState("");
+  const [status, setStatus] = useState("");
   const [task, setTask] = useState("");
 
-  function updateTask(taskKey) {
-    const taskRef = ref(db, `/tarefas/${userKey}`);
-    update(taskRef, {
-      nome: taskName,
-      deadline: deadline,
-    });
-    navigation.navigate("Home");
-  }
-
-  const fetchTasks = async () => {
-    try {
-      onValue(ref(db, "/tarefas"), (querySnapShot) => {
-        const taskData = querySnapShot.val() || {};
-        setTask(taskData);
-        console.log(taskData);
-      });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }),
-    [];
-
   return (
-    <View>
-      <Text style={"color: #000"}>Udating task: </Text>
-      <Text style={"color: #000"}>Update Task name</Text>
-      <TextInput
-        placeholder="Insert the new name"
-        onChange={(texto) => setTaskName(texto)}
-      />
-      <Text style={"color: #000"}>Update Deadline</Text>
-      <TextInput
-        placeholder="Insert the new deadline"
-        onChange={(texto) => setDeadline(texto)}
-      />
-      <Button onPress={updateTask(taskKey)}>Submit</Button>
-    </View>
+    <Container>
+      <HeaderArea>
+        <HeaderText>Edit Task</HeaderText>
+      </HeaderArea>
+      <ContentArea>
+        <AreaInput>
+          <Input
+            placeholder="Insert new name"
+            onChangeText={(text) => setTaskName(text)}
+          />
+        </AreaInput>
+        <AreaInput>
+          <Input
+            placeholder="Insert new deadline"
+            onChangeText={(text) => setDeadline(text)}
+          />
+        </AreaInput>
+        <AreaInput>
+          <Input
+            placeholder="Insert new status"
+            onChangeText={(text) => setStatus(text)}
+          />
+        </AreaInput>
+      </ContentArea>
+      <SubmitButton>
+        <ButtonText>Submit changes</ButtonText>
+      </SubmitButton>
+    </Container>
   );
 }
