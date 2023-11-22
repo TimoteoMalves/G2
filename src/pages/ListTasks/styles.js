@@ -45,11 +45,19 @@ export const SubmitButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
+export const ListArea = styled.View`
+  flex: 1;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10%;
+`;
+
 export const List = styled.FlatList`
   top: 5%;
-  width: 90%;
-  height: 20%;
-  flex: 1;
+  margin: auto;
+  width: 95%;
+  height: 70%;
 `;
 
 export const ButtonText = styled.Text`
