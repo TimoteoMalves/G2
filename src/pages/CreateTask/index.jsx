@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
-import { ref, onValue, push } from "firebase/database";
+import { ref, push } from "firebase/database";
 import { db } from "../../services/firebaseConnection";
 import {
   Container,
@@ -24,11 +24,12 @@ export default function CreateTask() {
   function onSubmitCreate() {
     const newData = { name, deadline, status };
     try {
-      push(ref(db, "/tasks"), newData);
-      setName("");
-      setStatus("");
-      setDeadline("");
-      navigation.navigate("ListTasks");
+      push(ref(db, "/tasks"), newData).then(() => {
+        setName("");
+        setStatus("");
+        setDeadline("");
+        navigation.navigate("ListTasks");
+      });
     } catch (error) {
       Alert.alert("Erro ao criar: ", error.message);
     }

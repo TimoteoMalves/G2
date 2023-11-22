@@ -49,6 +49,7 @@ export const List = styled.FlatList`
   top: 5%;
   width: 90%;
   height: 20%;
+  flex: 1;
 `;
 
 export const ButtonText = styled.Text`

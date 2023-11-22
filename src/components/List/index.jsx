@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Alert } from "react-native";
 import { ref, remove } from "firebase/database";
 import { db } from "../../services/firebaseConnection";
 import {
@@ -12,31 +13,33 @@ import {
   EditButton,
 } from "./styles";
 
-export default function TaskList({ data }) {
+export default function TaskList({ data, id }) {
   const navigation = useNavigation();
 
-  function removeTask(data) {
-    const taskRef = ref(db, `/tasks/${data.id}`);
+  function removeTask(id) {
+    const taskRef = ref(db, `/tasks/${id}`);
     remove(taskRef)
       .then(() => {
-        console.log(`Task removed successfully.`);
+        Alert.alert("Removed successfully.");
       })
       .catch((error) => {
-        console.error(`Error trying to remove a task ${error}`);
+        Alert.alert(`Error trying to remove a task ${error}`);
       });
   }
-
   return (
     <Card>
       <Title>{data.name}</Title>
       <Deadline>{data.deadline}</Deadline>
+      <Deadline style={{ color: data.status === "ativo" ? "#008000" : "#f00" }}>
+        {data.status}
+      </Deadline>
       <ButtonContainer>
-        <RemoveButton title="🗑 Remove" onPress={removeTask} />
+        <RemoveButton title="🗑 Remove" onPress={() => removeTask(id)} />
       </ButtonContainer>
       <ButtonContainer>
         <EditButton
           title="🖊 Edit"
-          onPress={() => navigation.navigate("Update")}
+          onPress={() => navigation.navigate("Update", { task: data, id })}
         />
       </ButtonContainer>
     </Card>

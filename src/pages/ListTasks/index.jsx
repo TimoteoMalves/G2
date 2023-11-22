@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Alert } from "react-native";
 import TaskList from "../../components/List";
 import { db } from "../../services/firebaseConnection";
 import { ref, onValue } from "firebase/database";
@@ -7,8 +8,6 @@ import {
   Container,
   HeaderText,
   HeaderArea,
-  SubmitButton,
-  ButtonText,
   HeaderButton,
   List,
   HeaderButtonText,
@@ -16,27 +15,15 @@ import {
 
 export default function ListTasks() {
   const navigation = useNavigation();
-  const [tasks, setTasks] = useState("");
-  const [loading, setLoading] = useState("");
-
+  const [tasks, setTasks] = useState();
   const loadTasks = async () => {
     try {
       onValue(ref(db, "/tasks"), (querySnapShot) => {
-        const tasksFormat = [];
-        querySnapShot.forEach((child) => {
-          tasksFormat.push({
-            id: child.key,
-            ...child.val(),
-          });
-        });
-        setTasks(tasksFormat);
-        setLoading(false);
-        console.log(tasksFormat);
+        const task = querySnapShot.val() || {};
+        setTasks(task);
       });
     } catch (error) {
-      console.log("erro");
-    } finally {
-      setLoading(false);
+      Alert.alert("erro");
     }
   };
 
@@ -53,13 +40,15 @@ export default function ListTasks() {
         </HeaderButton>
       </HeaderArea>
 
-      <List
-        showsVerticalScrollIndicator={false}
-        scrollEnabled={true}
-        data={tasks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <TaskList data={item} />}
-      />
+      {tasks && (
+        <List
+          showsVerticalScrollIndicator={false}
+          scrollEnabled={true}
+          data={Object.keys(tasks)}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => <TaskList data={tasks[item]} id={item} />}
+        />
+      )}
     </Container>
   );
 }

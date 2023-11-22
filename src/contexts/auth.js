@@ -53,6 +53,8 @@ function AuthProvider({ children }) {
     navigation.navigate("SignIn");
   }
 
+  signOutApp();
+
   return (
     <AuthContext.Provider
       value={{

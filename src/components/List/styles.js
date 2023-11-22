@@ -12,19 +12,20 @@ export const Card = styled.View`
 
 export const Title = styled.Text`
   text-align: left;
-  font-size: 23px;
+  font-size: 20px;
   margin-top: 5px;
 `;
 
 export const Deadline = styled.Text`
   text-align: left;
-  font-size: 23px;
+  font-size: 20px;
   margin-left: 7px;
 `;
 
 export const Status = styled.Text`
   text-align: left;
-  font-size: 23px;
+  font-size: 15px;
+  margin-left: 7px;
 `;
 
 export const ButtonContainer = styled.View``;
