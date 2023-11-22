@@ -19,7 +19,7 @@ export default function CreateTask() {
   const navigation = useNavigation();
   const [deadline, setDeadline] = useState("");
   const [name, setName] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(false);
 
   function onSubmitCreate() {
     const newData = { name, deadline, status };
@@ -54,14 +54,6 @@ export default function CreateTask() {
             placeholder="Insert the task's deadline"
             value={deadline}
             onChangeText={(text) => setDeadline(text)}
-          />
-        </AreaInput>
-        <Title>Status</Title>
-        <AreaInput>
-          <Input
-            placeholder="Insert the task's status"
-            value={status}
-            onChangeText={(text) => setStatus(text)}
           />
         </AreaInput>
       </ContentArea>

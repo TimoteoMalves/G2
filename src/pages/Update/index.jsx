@@ -66,13 +66,6 @@ export default function Update() {
             onChangeText={(text) => setDeadline(text)}
           />
         </AreaInput>
-        <AreaInput>
-          <Input
-            value={status}
-            placeholder="Insert new status"
-            onChangeText={(text) => setStatus(text)}
-          />
-        </AreaInput>
       </ContentArea>
       <SubmitButton onPress={() => updateTask(id)}>
         <ButtonText>Submit changes</ButtonText>
